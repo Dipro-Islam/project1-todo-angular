@@ -1,0 +1,18 @@
+<section>
+    <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+
+        <h1>New Todo</h1>
+
+        <input ngModel required name="task" type="text">
+        <button type="submit">
+            <span class="material-icons">
+                done
+            </span>
+            Add Todo</button>
+    </form>
+    <div class="todo-list">
+        <br><br><br>
+
+        <app-list *ngFor="let todo of todos" [todo]="todo"></app-list>>
+    </div>
+</section>
