@@ -1,18 +1,38 @@
-<section>
-    <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
-
-        <h1>New Todo</h1>
-
-        <input ngModel required name="task" type="text">
-        <button type="submit">
-            <span class="material-icons">
-                done
-            </span>
-            Add Todo</button>
+<div class="default" *ngIf="appState == 'default'">
+    <h1>Add Todo</h1>
+    <form (ngSubmit)="addTodo()">
+        <input type="text" [(ngModel)]="text" name='text'>
     </form>
-    <div class="todo-list">
-        <br><br><br>
+</div>
 
-        <app-list *ngFor="let todo of todos" [todo]="todo"></app-list>>
-    </div>
-</section>
+<div class="edit" *ngIf="appState == 'edit'">
+    <h1>Edit Todo</h1>
+    <form (ngSubmit)="updateTodo()">
+        <input type="text" [(ngModel)]="text" name='edit'>
+    </form>
+</div>
+
+
+<div class="list-todos incomplete">
+    <ul *ngFor="let todo of todos">
+        <div *ngIf="!this.todo.isComplete">
+            <button class="done" (click)="onComplete(todo)">done</button>
+            <span class="todo-ist" (click)="onEdit(todo)">{{todo.text}}</span>
+            <button class="edit-btn" (click)="onEdit(todo)">Edit</button>
+            <button class="deletBtn" (click)="onDelet(todo.text)">X</button>
+        </div>
+    </ul>
+</div>
+
+<br><br><br>
+
+<div class="list-todos complete">
+    <h1>Completed</h1>
+    <ul *ngFor="let todo of todos">
+        <div *ngIf="this.todo.isComplete">
+
+            <span class="todo-ist" (click)="onEdit(todo)">{{todo.text}}</span>
+            <button class="deletBtn" (click)="onDelet(todo.text)">X</button>
+        </div>
+    </ul>
+</div>

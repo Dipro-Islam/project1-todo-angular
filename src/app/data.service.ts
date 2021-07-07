@@ -1,30 +1,35 @@
+
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+
 import { Todo } from './model';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
 
-  todos: Todo[] =
-    [
-      new Todo('dipro', 10),
-      new Todo('Hridoy', 11)
-    ];
+export class DataService extends Todo {
 
-  constructor() { }
+
+
+  constructor() {
+    super()
+    this.load();
+  }
 
   getAllTodos() {
-    return this.todos
-  }
-  addTodo(todo: Todo) {
-    this.todos.push(todo)
+
+    return localStorage.getItem('todos');
   }
 
-  updateTodo(index: number, updatedTodo: Todo) {
-    this.todos[index] = updatedTodo
+  addTodo(ab: any) {
+
+    let todos = localStorage.getItem('todos');
+
+
   }
-  deletTodo(index: number) {
-    this.todos.splice(index, 1)
-  }
+
+
 }
