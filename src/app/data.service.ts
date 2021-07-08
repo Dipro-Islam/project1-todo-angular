@@ -1,35 +1,59 @@
-
-import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-
-import { Todo } from './model';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
+export class DataService {
 
-export class DataService extends Todo {
-
-
+  todos: any[] = [];
+  complete: any[] = [];
 
   constructor() {
-    super()
-    this.load();
   }
 
   getAllTodos() {
-
-    return localStorage.getItem('todos');
+    this.todos = JSON.parse(<string>localStorage.getItem('todos'));
+    return this.todos ? this.todos : [];
   }
 
-  addTodo(ab: any) {
-
-    let todos = localStorage.getItem('todos');
-
-
+  getAllComplete() {
+    this.complete = JSON.parse(<string>localStorage.getItem('complete'));
+    return this.complete ? this.complete : [];
   }
+
+
+
+  addTodo(todos: any) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  deletTodo(todos: any) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  updatedTodo(todos: any) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  // Complete section
+
+  addCompleteTodo(complete: any) {
+
+    localStorage.setItem('complete', JSON.stringify(complete));
+  }
+
+  completeDelet(complete: any) {
+    localStorage.setItem('todos', JSON.stringify(complete));
+  }
+
+  deletTodoComplete(complete: any) {
+    localStorage.setItem('complete', JSON.stringify(complete));
+  }
+
+
+
 
 
 }
+
+
+
