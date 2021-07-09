@@ -18,6 +18,15 @@ export class AddComponent implements OnInit {
   oldText: any;
   appState = 'default';
   id: number = Math.random();
+  selectedValue: any;
+
+  //Date picker
+
+  minDate = new Date();
+  maxDate = new Date(2022, 0, 1);
+  dueDate = new Date();
+
+
 
 
 
@@ -36,7 +45,8 @@ export class AddComponent implements OnInit {
     let id = Math.random();
     let newTodo = {
       text: this.text,
-      id: id
+      id: id,
+      date: this.dueDate
     }
 
     this.todos.push(newTodo);
@@ -89,7 +99,8 @@ export class AddComponent implements OnInit {
 
     let newCompleteTodo = {
       text: todo.text,
-      id: todo.id
+      id: todo.id,
+      date: todo.date
     }
     this.complete.push(newCompleteTodo);
     console.log(this.complete);
@@ -105,6 +116,13 @@ export class AddComponent implements OnInit {
       }
     }
     this.dataService.completeDelet(this.todos);
+
+  }
+
+
+
+  dateChange(event: any) {
+    this.dueDate = event.target.value;
 
   }
 
